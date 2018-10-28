@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void bfs(int n, int u, int** adjacencyList, int* count, int* order, int* parent, int* children, int* low, int* ap);
+void dfs(int n, int u, int** adjacencyList, int* count, int* order, int* parent, int* children, int* low, int* ap);
 void printAdjacencyList (int n, int** adjacencyList);
 void printArray(int n, int* array);
 
@@ -43,16 +43,16 @@ int main(int argc, char const *argv[]) {
     }
     // end init structures
 
-    // bfs to detect cut vertices
+    // dfs to detect cut vertices
     for (int i = 0; i < n; ++i) {
     	if (order[i]==0) { // not visited
-    		bfs(n, i, adjacencyList, &count, order, parent, children, low, ap);
+    		dfs(n, i, adjacencyList, &count, order, parent, children, low, ap);
     		if (children[i]>1) {
     			ap[i]=1;
     		}
     	}
     }
-    // end bfs
+    // end dfs
 
     // print
     printf("Adjacency list :\n");
@@ -73,7 +73,7 @@ int main(int argc, char const *argv[]) {
 	return 0;
 }
 
-void bfs(int n, int u, int** adjacencyList, int* count, int* order, int* parent, int* children, int* low, int* ap) {
+void dfs(int n, int u, int** adjacencyList, int* count, int* order, int* parent, int* children, int* low, int* ap) {
 	order[u]=++(*count);
 	low[u]=order[u];
 	for (int i = 1; i <= adjacencyList[u][0]; ++i) {
@@ -84,7 +84,7 @@ void bfs(int n, int u, int** adjacencyList, int* count, int* order, int* parent,
 				printf("vertice 0 parent of %d\n", v);
 			}
 			parent[v]=u;
-			bfs(n, v, adjacencyList, count, order, parent, children, low, ap);
+			dfs(n, v, adjacencyList, count, order, parent, children, low, ap);
 			low[u]=(low[u]>low[v])?low[v]:low[u];
 			if ((parent[u]!=-1)&&(low[v]>=order[u])) {
 				ap[u]=1;
