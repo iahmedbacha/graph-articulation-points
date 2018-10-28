@@ -80,9 +80,6 @@ void dfs(int n, int u, int** adjacencyList, int* count, int* order, int* parent,
 		int v = adjacencyList[u][i];
 		if (order[v]==0) { // not visited
 			children[u]++;
-			if (u==0) {
-				printf("vertice 0 parent of %d\n", v);
-			}
 			parent[v]=u;
 			dfs(n, v, adjacencyList, count, order, parent, children, low, ap);
 			low[u]=(low[u]>low[v])?low[v]:low[u];
@@ -90,7 +87,7 @@ void dfs(int n, int u, int** adjacencyList, int* count, int* order, int* parent,
 				ap[u]=1;
 			}
 		}
-		else {
+		else { // visited
 			low[u]=(low[u]>order[v])?order[v]:low[u];
 		}
 	}
