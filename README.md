@@ -1,2 +1,2 @@
-# graph_articulation_points
+# Graph Articulation Points
 Find all articulation points in an undirected graph
